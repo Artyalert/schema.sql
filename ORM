@@ -1,0 +1,37 @@
+-- Table for product categories
+CREATE TABLE product_category (
+  category_id INT PRIMARY KEY AUTO_INCREMENT,
+  category_name VARCHAR(255) NOT NULL,
+  category_description TEXT,
+  category_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  category_modified_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  category_deleted_at TIMESTAMP DEFAULT NULL
+);
+
+-- Table for products
+CREATE TABLE product (
+  product_id INT PRIMARY KEY AUTO_INCREMENT,
+  product_name VARCHAR(255) NOT NULL,
+  product_description TEXT,
+  product_SKU VARCHAR(255) NOT NULL,
+  product_category_id INT NOT NULL,
+  product_inventory_id INT,
+  product_price DECIMAL(10,2) NOT NULL,
+  product_discount_id INT,
+  product_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  product_modified_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  product_deleted_at TIMESTAMP DEFAULT NULL,
+  FOREIGN KEY (product_category_id) REFERENCES product_category(category_id)
+);
+
+-- Table for discounts
+CREATE TABLE discount (
+  discount_id INT PRIMARY KEY AUTO_INCREMENT,
+  discount_name VARCHAR(255) NOT NULL,
+  discount_description TEXT,
+  discount_percent DECIMAL(10,2) NOT NULL,
+  discount_active BOOLEAN NOT NULL DEFAULT TRUE,
+  discount_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  discount_modified_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  discount_deleted_at TIMESTAMP DEFAULT NULL
+);
